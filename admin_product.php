@@ -29,15 +29,16 @@
 		else{
 			$insert_product = mysqli_query($conn, "INSERT INTO `products` (`name`, `price`, `product_detail`, `image`) VALUES ('$product_name','$product_price','$product_detail','$image')") or die('query failed');
 
-			if($insert_product){
-				if($image_size>2000000){
-					$message[]='image size is too large';
-				}
-				else{
-					move_uploaded_file($image_tmp_name,$image_folder);
-					$message[]='product added successfully';
-				}
-			}
+			if ($insert_product) {
+    // Check image size
+    $image_size = $_FILES['image']['size'];
+    if ($image_size > 200000) {
+        $message[] = 'Image size is too large';
+    } else {
+        move_uploaded_file($image_tmp_name, $image_folder);
+        $message[] = 'Product added successfully';
+    }
+}
 		}
 	}
 	// delete process to database
@@ -78,10 +79,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--box icon link-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
     <title>admin panel</title>
 </head>
 <body>
@@ -97,9 +99,9 @@
             ';
         }
     }
-    ?>
-        <div class="line2"></div>
-        <section class="add-products form-container">
+    ?>      
+      
+    <section class="form-container2">
 
         <form method="POST" action="" enctype="multipart/form-data">
             <div class="input-field">
@@ -124,7 +126,6 @@
             <input type="submit" name="add_product" value="add product" class="btn">
         </form>
     </section>
-    <div class="line3"></div>
     <div class="line4"></div>
     <section class="show-products">
         <div class="box-container">
@@ -134,10 +135,10 @@
                 ?>
                 <div class="box">
                     <img src="image/<?php echo $fetch_products['image'];?>">
-                    <p>price : $<?php echo $fetch_products['price'];?></p>
+                    <p>price : ₹<?php echo $fetch_products['price'];?></p>
                     <h4><?php echo $fetch_products['name'];?></h4>
                     <details><?php echo $fetch_products['product_detail'];?></details>
-                    <a href="admin_product.php?edit=<?php echo $fetch_products['id'];?>" class="edit">edit</a>
+                    <a href="admin_product.php?edit=<?php echo $fetch_products['id'];?>" class="edit">edit</a><br>
                     <a href="admin_product.php?delete=<?php echo $fetch_products['id'];?>" class="delete" onclick="return confirm('want to delete this product');">delete</a>
                 </div>
                 <?php
@@ -152,7 +153,6 @@
         ?>
         </div>
     </section>
-    <div class="line"></div>
     <section class="update-container">
         <?php
             if(isset($_GET['edit'])){
@@ -178,7 +178,7 @@
             }
         ?>
     </section>
-    
+    <div class="line4"></div>
     <script type="text/javascript" src="script.js"></script>
     
 </body>

@@ -1,27 +1,27 @@
 <?php
-	include 'connection.php';
-	session_start();
-	$admin_id = $_SESSION['admin_name'];
+    include 'connection.php';
+    session_start();
+    $admin_id = $_SESSION['admin_name'];
 
-	if (!isset($admin_id)) {
-		header('location:login.php');
-	}
+    if (!isset($admin_id)) {
+        header('location:login.php');
+    }
 
-	if(isset($_POST['logout'])){
-		session_destroy();
-		header('location:login.php');
-	} 
-	// adding products to database 
-	
-	// delete process to database
-	if(isset($_GET['delete'])){
-		$delete_id = $_GET['delete'];
-		
-		mysqli_query($conn,"DELETE FROM `order` WHERE id = '$delete_id' ")or die('query failed');
-		header('location:admin_order.php');
+    if(isset($_POST['logout'])){
+        session_destroy();
+        header('location:login.php');
+    } 
+    // adding products to database 
+    
+    // delete process to database
+    if(isset($_GET['delete'])){
+        $delete_id = $_GET['delete'];
+        
+        mysqli_query($conn,"DELETE FROM `order` WHERE id = '$delete_id' ")or die('query failed');
+        header('location:admin_order.php');
         $message[]=  'user removed succesfully';
-	}
-	// update psymnet status
+    }
+    // update psymnet status
 
     if (isset($_POST['update_order'])){
         $order_id = $_POST['order_id'];
@@ -32,7 +32,7 @@
         
 
     }
-	
+    
     
 ?>    
 <style type="text/css">
@@ -90,8 +90,8 @@
 <select name="update_payment">
 
 <option disabled selected><?php echo $fetch_order['payment_status']; ?></option>
-<option value="pending">Pending</option>
-<option value="complete">complete</option>
+<option value="Pending">Pending</option>
+<option value="Complete">Complete</option>
 </select>
 <input type ="submit" name="update_order" value="update  payment" class="btn">
 <a href="admin_order.php?delete=<?php echo $fetch_order['id']; ?>" onclick="return confirm('Delete this message?');" class="delete">delete</a>
@@ -104,7 +104,7 @@
             }
         } else {
             echo '<div class="empty"> 
-                <p>No messages added yet!</p>
+                <p>No order placed yet!</p>
             </div>';
         }
         ?>

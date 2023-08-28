@@ -23,7 +23,9 @@ if (isset($_POST['submit-btn'])) {
                 $_SESSION['admin_password'] = $row['password'];
                 header('location: admin_pannel.php');
                 exit();
+                
             } else if ($row['user_type'] == 'user') {
+                $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_name'] = $row['name'];
                 $_SESSION['user_email'] = $row['email'];
                 $_SESSION['user_password'] = $row['password'];
@@ -62,7 +64,7 @@ if (isset($_POST['submit-btn'])) {
         }
     }
     ?>
-    <section class="form-container">
+    <section class="form-container1">
         <form method="post"> 
             <h1>Login Page</h1>
             <div class="input-field">

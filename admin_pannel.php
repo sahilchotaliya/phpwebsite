@@ -17,7 +17,12 @@ if(isset($_POST['logout'])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Include jQuery from a CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Other head content -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <title>admin panel</title>
@@ -107,6 +112,8 @@ if(isset($_POST['logout'])){
 
         </div>
     </section>
+    <div class="line4"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
